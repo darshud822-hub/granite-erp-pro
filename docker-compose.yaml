@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: granite_postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: granite_erp
+      POSTGRES_USER: granite_admin
+      POSTGRES_PASSWORD: YourStrongPassword123!
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+
+    container_name: granite_redis
+
+    ports:
+      - "6379:6379"
+
+  api:
+
+    build: ./apps/api
+
+    container_name: granite_api
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - postgres
+      - redis
+
+    env_file:
+      - .env
+
+  web:
+
+    build: ./apps/web
+
+    container_name: granite_web
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - api
+
+volumes:
+
+  postgres_data:
