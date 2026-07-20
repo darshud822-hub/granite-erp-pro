@@ -7,23 +7,28 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base_model import BaseModel
 
 
-class PurchaseOrder(BaseModel):
-    __tablename__ = "purchase_orders"
+class GRN(BaseModel):
+    __tablename__ = "grns"
 
-    po_number: Mapped[str] = mapped_column(
+    grn_number: Mapped[str] = mapped_column(
         String(30),
         unique=True,
         nullable=False,
         index=True,
     )
 
-    po_date: Mapped[date] = mapped_column(
+    grn_date: Mapped[date] = mapped_column(
         Date,
         nullable=False,
     )
 
-    supplier_id: Mapped[UUID] = mapped_column(
-        ForeignKey("suppliers.id"),
+    purchase_order_id: Mapped[UUID] = mapped_column(
+        ForeignKey("purchase_orders.id"),
+        nullable=False,
+    )
+
+    warehouse_id: Mapped[UUID] = mapped_column(
+        ForeignKey("warehouses.id"),
         nullable=False,
     )
 
@@ -37,26 +42,22 @@ class PurchaseOrder(BaseModel):
         nullable=False,
     )
 
-    status: Mapped[str] = mapped_column(
-        String(30),
-        default="DRAFT",
-    )
-
     remarks: Mapped[str | None] = mapped_column(
         String(500),
         nullable=True,
     )
 
-    supplier = relationship("Supplier")
+    purchase_order = relationship("PurchaseOrder")
+    warehouse = relationship("Warehouse")
     company = relationship("Company")
     branch = relationship("Branch")
 
     items = relationship(
-        "PurchaseOrderItem",
-        back_populates="purchase_order",
+        "GRNItem",
+        back_populates="grn",
         cascade="all, delete-orphan",
     )
-    grns = relationship(
-    "GRN",
-    back_populates="purchase_order",
+    purchase_order = relationship(
+    "PurchaseOrder",
+    back_populates="grns",
 )

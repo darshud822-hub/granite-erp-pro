@@ -16,6 +16,7 @@ from app.modules.warehouse.router import router as warehouse_router
 from app.modules.stock.router import router as stock_router
 from app.modules.stock_movement.router import router as stock_movement_router
 from app.modules.purchase_order.router import router as purchase_order_router
+from app.modules.grn.router import router as grn_router
 
 app = FastAPI(
     title="Granite ERP Pro API",
@@ -37,6 +38,7 @@ app.include_router(warehouse_router)
 app.include_router(stock_router)
 app.include_router(stock_movement_router)
 app.include_router(purchase_order_router)
+app.include_router(grn_router)
 
 @app.get("/")
 def root():

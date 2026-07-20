@@ -18,7 +18,8 @@ from app.models.stock import Stock
 from app.models.stock_movement import StockMovement
 from app.models.purchase_order import PurchaseOrder
 from app.models.purchase_order_item import PurchaseOrderItem
-
+from app.models.grn import GRN
+from app.models.grn_item import GRNItem
 
 
 __all__ = [
