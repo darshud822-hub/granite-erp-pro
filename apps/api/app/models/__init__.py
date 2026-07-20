@@ -39,7 +39,11 @@ from app.models.customer_payment import (
     PaymentMethod,
     CustomerPaymentStatus,
 )
-
+from app.models.supplier_payment import (
+    SupplierPayment,
+    SupplierPaymentMethod,
+    SupplierPaymentStatus,
+)
 
 __all__ = [
     "Base",

@@ -1,13 +1,18 @@
 from datetime import date
 from decimal import Decimal
-
+from enum import Enum                  # Python Enum ✅
+from sqlalchemy import Enum as SqlEnum # SQLAlchemy Enum ✅
 from sqlalchemy import Date, ForeignKey, Numeric, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base_model import BaseModel
 
-
+class PurchaseInvoiceStatus(str, Enum):
+    DRAFT = "DRAFT"
+    PARTIALLY_PAID = "PARTIALLY_PAID"
+    PAID = "PAID"
+    CANCELLED = "CANCELLED"
 class PurchaseInvoice(BaseModel):
     __tablename__ = "purchase_invoices"
 
@@ -66,6 +71,15 @@ class PurchaseInvoice(BaseModel):
         default=0,
         nullable=False,
     )
+    paid_amount: Mapped[Decimal] = mapped_column(
+    Numeric(12, 2),
+    default=0,
+)
+
+    balance_amount: Mapped[Decimal] = mapped_column(
+    Numeric(12, 2),
+    default=0,
+)
 
     remarks: Mapped[str | None] = mapped_column(
         String(500),
