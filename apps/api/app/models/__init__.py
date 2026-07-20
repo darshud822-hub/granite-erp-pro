@@ -46,6 +46,10 @@ from app.models.supplier_payment import (
 )
 from app.models.accounts_receivable import AccountsReceivable
 from app.models.accounts_payable import AccountsPayable
+from app.models.chart_of_account import (
+    ChartOfAccount,
+    AccountType,
+)
 
 __all__ = [
     "Base",
