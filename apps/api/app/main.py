@@ -31,6 +31,9 @@ from app.modules.supplier_payment.router import (
 from app.modules.accounts_receivable.router import (
     router as accounts_receivable_router,
 )
+from app.modules.accounts_payable.router import (
+    router as accounts_payable_router,
+)
 
 app = FastAPI(
     title="Granite ERP Pro API",
@@ -59,6 +62,7 @@ app.include_router(sales_invoice_router)
 app.include_router(customer_payment_router)
 app.include_router(supplier_payment_router)
 app.include_router(accounts_receivable_router)
+app.include_router(accounts_payable_router)
 
 @app.get("/")
 def root():
