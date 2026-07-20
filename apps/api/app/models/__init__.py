@@ -20,6 +20,8 @@ from app.models.purchase_order import PurchaseOrder
 from app.models.purchase_order_item import PurchaseOrderItem
 from app.models.grn import GRN
 from app.models.grn_item import GRNItem
+from app.models.purchase_invoice import PurchaseInvoice
+from app.models.purchase_invoice_item import PurchaseInvoiceItem
 
 
 __all__ = [
