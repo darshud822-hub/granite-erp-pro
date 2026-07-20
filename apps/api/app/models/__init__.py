@@ -44,6 +44,7 @@ from app.models.supplier_payment import (
     SupplierPaymentMethod,
     SupplierPaymentStatus,
 )
+from app.models.accounts_receivable import AccountsReceivable
 
 __all__ = [
     "Base",
