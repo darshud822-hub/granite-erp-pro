@@ -34,6 +34,11 @@ class Stock(BaseModel):
         Numeric(12, 2),
         default=0,
     )
+    unit_cost: Mapped[Decimal] = mapped_column(
+    Numeric(12, 2),
+    default=0,
+    nullable=False,
+)
 
     reserved_quantity: Mapped[Decimal] = mapped_column(
         Numeric(12, 2),

@@ -50,6 +50,14 @@ from app.models.chart_of_account import (
     ChartOfAccount,
     AccountType,
 )
+from app.models.journal_entry import (
+    JournalEntry,
+    JournalStatus,
+)
+
+from app.models.journal_entry_line import (
+    JournalEntryLine,
+)
 
 __all__ = [
     "Base",

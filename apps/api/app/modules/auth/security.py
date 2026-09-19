@@ -28,20 +28,16 @@ def verify_password(
     )
 
 
-def create_access_token(data: dict, minutes: int = 30):
-
-    payload = data.copy()
-
-    expire = datetime.now(timezone.utc) + timedelta(
-        minutes=minutes
+def create_access_token(data: dict) -> str:
+    expire = datetime.now(UTC) + timedelta(
+        minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
     )
 
-    payload.update({
-        "exp": expire
-    })
+    payload = data.copy()
+    payload["exp"] = expire
 
     return jwt.encode(
         payload,
-        SECRET_KEY,
-        algorithm=ALGORITHM
+        settings.SECRET_KEY,
+        algorithm=settings.ALGORITHM,
     )

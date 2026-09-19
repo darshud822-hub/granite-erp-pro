@@ -37,6 +37,28 @@ from app.modules.accounts_payable.router import (
 from app.modules.chart_of_accounts.router import (
     router as chart_of_accounts_router,
 )
+from app.modules.journal_entries.router import (
+    router as journal_entries_router,
+)
+from app.modules.general_ledger.router import (
+    router as general_ledger_router,
+)
+from app.modules.trial_balance.router import (
+    router as trial_balance_router,
+)
+from app.modules.profit_and_loss.router import (
+    router as profit_and_loss_router,
+)
+from app.modules.balance_sheet.router import (
+    router as balance_sheet_router,
+)
+from app.modules.cash_flow.router import (
+    router as cash_flow_router,
+)
+from app.modules.dashboard.router import (
+    router as dashboard_router,
+)
+from fastapi.middleware.cors import CORSMiddleware                                                                  
 
 app = FastAPI(
     title="Granite ERP Pro API",
@@ -67,7 +89,23 @@ app.include_router(supplier_payment_router)
 app.include_router(accounts_receivable_router)
 app.include_router(accounts_payable_router)
 app.include_router(chart_of_accounts_router)
-
+app.include_router(journal_entries_router)
+app.include_router(general_ledger_router)
+app.include_router(trial_balance_router)
+app.include_router(profit_and_loss_router)
+app.include_router(balance_sheet_router)
+app.include_router(cash_flow_router)
+app.include_router(dashboard_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/")
 def root():
     return {

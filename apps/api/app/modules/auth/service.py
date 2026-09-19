@@ -1,3 +1,5 @@
+import token
+
 from sqlalchemy.orm import Session
 from app.core.roles import UserRole
 from app.core.security import (
@@ -5,6 +7,7 @@ from app.core.security import (
     verify_password,
     create_access_token,
 )
+from app.models import user
 from app.models.user import User
 from app.modules.auth.schemas import UserRegister
 
@@ -74,7 +77,20 @@ def login_user(db: Session, username: str, password: str):
 
     print("✅ Creating JWT for:", user.username)
 
-    token = create_access_token(str(user.id))
+    token = create_access_token(
+    {
+        "sub": str(user.id),
+        "username": user.username,
+        "role": user.role,
+    }
+)
+
+    return {
+    "access_token": token,
+    "token_type": "bearer",
+}
+
+
 
     print("✅ JWT created")
 

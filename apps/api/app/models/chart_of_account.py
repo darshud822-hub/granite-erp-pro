@@ -14,6 +14,10 @@ class AccountType(str, Enum):
     INCOME = "INCOME"
     EXPENSE = "EXPENSE"
 
+class CashFlowCategory(str, Enum):
+    OPERATING = "OPERATING"
+    INVESTING = "INVESTING"
+    FINANCING = "FINANCING"
 
 class ChartOfAccount(BaseModel):
     __tablename__ = "chart_of_accounts"
@@ -34,7 +38,10 @@ class ChartOfAccount(BaseModel):
         SqlEnum(AccountType),
         nullable=False,
     )
-
+    cash_flow_category: Mapped[CashFlowCategory | None] = mapped_column(
+    SqlEnum(CashFlowCategory),
+    nullable=True,
+)
     parent_account_id: Mapped[UUID | None] = mapped_column(
         ForeignKey("chart_of_accounts.id"),
         nullable=True,
